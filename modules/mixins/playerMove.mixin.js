@@ -87,10 +87,10 @@ export default {
 				_.assign(newEntityLocation, { floor, chunk, x: +x, y: +y });
 			}
 
-			newEntityLocation.isNewLocation = newEntityLocation.x !== entity.x ||
-				newEntityLocation.y !== entity.y ||
-				newEntityLocation.chunk !== entity.chunk ||
-				newEntityLocation.floor !== entity.floor;
+			newEntityLocation.isNewLocation = newEntityLocation.x !== entity.old.x ||
+				newEntityLocation.y !== entity.old.y ||
+				newEntityLocation.chunk !== entity.old.chunk ||
+				newEntityLocation.floor !== entity.old.floor;
 
 			return this.canEntityMoveTo(entity.old, newEntityLocation) 
 				? newEntityLocation

@@ -184,6 +184,7 @@ export default {
 				const weaponId = entity.inventory[slot];
 				const weapon = this.myWorld.items[weaponId];
 				const { x, y, floor, chunk, isNewLocation } = this.getNewEntityLocation(entity, weapon.range);
+				this.changePlayerMode({ type: null, slot });
 				if(isNewLocation) {
 					const entitiesIds = this.matrixCubeEntities[floor][chunk][`${ x }-${ y }`];
 					for(const entityId of entitiesIds) {
@@ -198,7 +199,6 @@ export default {
 						}
 					}
 				} 
-				this.changePlayerMode({ type: null, slot });
 			} catch(err) {}
 		},
 		moveOnModePotion(entity) {},
