@@ -4,7 +4,7 @@ module.exports = {
   telemetry: false,
 
   head: {
-    title: 'cooking-recipe-database',
+    title: 'storymaze',
     htmlAttrs: {
       lang: 'ru'
     },
