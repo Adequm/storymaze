@@ -2,7 +2,7 @@
 	<div style="position: relative">
 		<div style="position: absolute">
 			<pre v-text="playerMode"/>
-			<pre v-text="player.inventory"/>
+			<pre v-text="player"/>
 		</div>
 
 		<div class="wrap" :class="{ lowOpacity: playerMode.type == 'camera' }">

@@ -4,7 +4,7 @@ import Vue from 'vue';
 import world from '@/modules/maps/matrix';
 
 const getMatrix = data => _.reduce(data, (matrix, drop) => {
-	if(drop.pickedBy) return matrix;
+	if(drop.pickedBy || drop.health <= 0) return matrix;
 	const keyMatrix = `[${ drop.floor }][${ drop.chunk }][${ drop.x }-${ drop.y }]`;
 	const cellMatrix = _.get(matrix, keyMatrix, []);
 	_.set(matrix, keyMatrix, cellMatrix.concat(drop.id));
