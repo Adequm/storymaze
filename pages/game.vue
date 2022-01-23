@@ -210,9 +210,10 @@ export default {
 			this.changePlayerMode({ type, slot });
 		},
 
-		executeActionByKeydown({ keyCode }) {
+		executeActionByKeydown(event) {
+			event.preventDefault();
 			requestAnimationFrame(() => {
-				const action = _.get(this.keyCodesForEvents, keyCode);
+				const action = _.get(this.keyCodesForEvents, event.keyCode);
 				this.executeAction(action, this.player);
 			})
 		},
