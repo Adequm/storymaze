@@ -23,7 +23,7 @@
 				:style="{ transform: cubeRotateStyle }"
 				:key="keyUpdateCubeSize"
 				@hoverCellHandler="lodash.assign(hoverCell, $event)"
-				@clickInChunk="addBrick"
+				@clickInChunk="clickInChunk"
 			/>
 		</div>
 
@@ -100,6 +100,9 @@ export default {
 	// },
 
 	methods: {
+		...mapActions([
+			'firstConnect',
+		]),
 		...mapMutations([
 			'changeCameraFloor',
 			'changeCameraChunk',
@@ -201,7 +204,10 @@ export default {
 				} 
 			} catch(err) {}
 		},
-		moveOnModePotion(entity) {},
+		moveOnModePotion(entity) {
+			const slot = this.playerMode.slot;
+			this.changePlayerMode({ type: null, slot });
+		},
 
 		changeInventorySlot(slot) {
 			const itemId = this.player.inventory[slot];
@@ -211,7 +217,7 @@ export default {
 		},
 
 		executeActionByKeydown(event) {
-			event.preventDefault();
+			// event.preventDefault();
 			requestAnimationFrame(() => {
 				const action = _.get(this.keyCodesForEvents, event.keyCode);
 				this.executeAction(action, this.player);
@@ -235,6 +241,7 @@ export default {
 	},
 
 	mounted() {
+		this.firstConnect();
 		this.$nextTick(() => {
 			window.addEventListener('keydown', this.executeActionByKeydown);
 		})

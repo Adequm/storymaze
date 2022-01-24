@@ -56,7 +56,7 @@ export default {
 	methods: {
 
 		getCellEntities({ floor, chunk, x, y }) {
-			return _.get(this.matrixCubeEntities, `[${ floor }][${ chunk }][${ x }-${ y }]`, {});
+			return _.get(this.matrixCubeEntities, `[${ floor }][${ chunk }][${ x }-${ y }]`, []);
 		},
 
 		getCellWalls({ floor, chunk, x, y }) {

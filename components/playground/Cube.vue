@@ -68,7 +68,7 @@
     		:walls="currentFloor.walls[player.chunk]"
     		:rotate="cameraLocal.rotatePlayer"
     		:cellSize="cellSize"
-    		:hoverCell="{}"
+    		:hoverCell="hoverCell"
     		:dynamicOfGame="dynamicOfGame"
     		:x="player.x + 1"
     		:y="player.y + 1"
