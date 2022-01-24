@@ -5,19 +5,19 @@ export default {
 	dynamicOfGame: 200,
 
 	entities: {
-		player: {
-			id: 'player',
-			type: 'player',
-			name: 'playerName',
-			floor: 'floor1',
-			chunk: 'front',
-			x: 2,
-			y: 2,
-			effects: {},
-			inventory: {},
-			coins: 0,
-			health: 4,
-		},
+		// player: {
+		// 	id: 'player',
+		// 	type: 'player',
+		// 	name: 'playerName',
+		// 	floor: 'floor1',
+		// 	chunk: 'front',
+		// 	x: 2,
+		// 	y: 2,
+		// 	effects: {},
+		// 	inventory: {},
+		// 	coins: 0,
+		// 	health: 4,
+		// },
 		enemy1: {
 			id: 'enemy1',
 			type: 'enemy',

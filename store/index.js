@@ -19,14 +19,7 @@ export const state = () => ({
 	world,
 	myId: 'player',
 	myWorld: {
-		entities: {
-			player: {
-				canMove: true,
-				moveTo: null,
-				moves: 0,
-				health: 4,
-			}
-		}
+		entities: {}
 	},
 	cameraLocal: {
 		floor: 'floor1',
@@ -71,7 +64,7 @@ export const getters = {
 			coins: 0,
 		} })
 	},
-	player: ({ myId }, { entities }) => entities[myId],
+	player: ({ myId }, { entities }) => _.get(entities, myId, {}),
 	currentFloor: ({ world, cameraLocal }) => _.get(world.floors, cameraLocal.floor, {}),
 	cubeSizes: ({}, { currentFloor }) => currentFloor.size || { x: 0, y: 0, z: 0 },
 	maxCubeSize: ({}, { cubeSizes }) => _.max(_.values(cubeSizes)),
@@ -90,19 +83,18 @@ export const getters = {
 };
 
 
+export const actions = {
+	firstConnect({ commit }) {
+		const myId = `player${ Date.now() }`;
+		this._vm.$socket.client.emit('firstConnect', myId);
+		commit('setMyId', myId);
+	},
+}
 
 
 export const mutations = {
-	setNewLocationEntity({ myWorld }, { id, x, y, chunk, floor }) {
-		const entity = _.get(myWorld.entities, id);
-		if(!entity) return console.log(`No entity [#${ id }]`);
-		const updatedEntity = _.defaults({
-			x: _.isUndefined(x) ? entity.x : x,
-			y: _.isUndefined(y) ? entity.y : y,
-			chunk: _.isUndefined(chunk) ? entity.chunk : chunk,
-			floor: _.isUndefined(floor) ? entity.floor : floor,
-		}, entity);
-	},
+	setMyId: (state, id) => Vue.set(state, 'myId', id),
+
 	setWindowInnerWidth: (state, xPx) => Vue.set(state, 'windowInnerWidth', xPx),
 	setWindowInnerHeight: (state, yPx) => Vue.set(state, 'windowInnerHeight', yPx),
 
@@ -188,5 +180,9 @@ export const mutations = {
 	},
 	updateKey({ updateKeys }, key) {
 		Vue.set(updateKeys, key, Date.now());
+	},
+
+	SOCKET_ADD_PLAYER({ myWorld }, player) {
+		Vue.set(myWorld.entities, player.id, player);
 	},
 };
